@@ -1,0 +1,5 @@
+- [x] expo router
+- [ ] animations examples
+  - [ ] lottie
+  - [ ] react native skia
+  - [ ] react native reanimated?
