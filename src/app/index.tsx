@@ -1,20 +1,23 @@
-import { Link } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Link } from "expo-router"
+import { StyleSheet, View } from "react-native"
+
+import { ScreenLayout } from "@/components/generic/ScreenLayout"
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Link href="/animations-example/lottie">Lottie</Link>
-      <Link href="/animations-example/skia">Skia</Link>
-    </View>
-  );
+    <ScreenLayout>
+      <View style={styles.container}>
+        <Link href="/animations-example/lottie">Lottie</Link>
+        <Link href="/animations-example/skia">Skia</Link>
+      </View>
+    </ScreenLayout>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-  },
-});
+    justifyContent: "center"
+  }
+})

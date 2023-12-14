@@ -1,12 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-
-import App from ".";
+import { Slot } from "expo-router";
 
 export default function RootLayout() {
   return (
     <>
-      <StatusBar style="auto" />
-      <App />
+      <Slot />
     </>
   );
 }

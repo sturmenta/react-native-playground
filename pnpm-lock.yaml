@@ -37,6 +37,9 @@ devDependencies:
   '@babel/core':
     specifier: ^7.20.0
     version: 7.23.6
+  '@ianvs/prettier-plugin-sort-imports':
+    specifier: ^4.1.1
+    version: 4.1.1(prettier@3.1.1)
   '@tsconfig/react-native':
     specifier: ^3.0.2
     version: 3.0.2
@@ -49,6 +52,9 @@ devDependencies:
   '@types/react-test-renderer':
     specifier: ^18.0.7
     version: 18.0.7
+  prettier-plugin-tailwindcss:
+    specifier: ^0.5.9
+    version: 0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.1.1)
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -1891,6 +1897,26 @@ packages:
     dependencies:
       '@hapi/hoek': 9.3.0
     dev: false
+
+  /@ianvs/prettier-plugin-sort-imports@4.1.1(prettier@3.1.1):
+    resolution: {integrity: sha512-kJhXq63ngpTQ2dxgf5GasbPJWsJA3LgoOdd7WGhpUSzLgLgI4IsIzYkbJf9kmpOHe7Vdm/o3PcRA3jmizXUuAQ==}
+    peerDependencies:
+      '@vue/compiler-sfc': '>=3.0.0'
+      prettier: 2 || 3
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.6
+      '@babel/generator': 7.23.6
+      '@babel/parser': 7.23.6
+      '@babel/traverse': 7.23.6
+      '@babel/types': 7.23.6
+      prettier: 3.1.1
+      semver: 7.5.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /@jest/create-cache-key-function@29.7.0:
     resolution: {integrity: sha512-4QqS3LY5PBmTRHj9sAg1HLoPzqAI0uOX6wI/TRqHIcOxlFidy6YEmCQJk6FSZjNLGCeubDMfmkWL+qaLKhSGQA==}
@@ -4925,7 +4951,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
-    dev: false
 
   /make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -5831,6 +5856,65 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
+  /prettier-plugin-tailwindcss@0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.1.1):
+    resolution: {integrity: sha512-9x3t1s2Cjbut2QiP+O0mDqV3gLXTe2CgRlQDgucopVkUdw26sQi53p/q4qvGxMLBDfk/dcTV57Aa/zYwz9l8Ew==}
+    engines: {node: '>=14.21.3'}
+    peerDependencies:
+      '@ianvs/prettier-plugin-sort-imports': '*'
+      '@prettier/plugin-pug': '*'
+      '@shopify/prettier-plugin-liquid': '*'
+      '@trivago/prettier-plugin-sort-imports': '*'
+      prettier: ^3.0
+      prettier-plugin-astro: '*'
+      prettier-plugin-css-order: '*'
+      prettier-plugin-import-sort: '*'
+      prettier-plugin-jsdoc: '*'
+      prettier-plugin-marko: '*'
+      prettier-plugin-organize-attributes: '*'
+      prettier-plugin-organize-imports: '*'
+      prettier-plugin-style-order: '*'
+      prettier-plugin-svelte: '*'
+      prettier-plugin-twig-melody: '*'
+    peerDependenciesMeta:
+      '@ianvs/prettier-plugin-sort-imports':
+        optional: true
+      '@prettier/plugin-pug':
+        optional: true
+      '@shopify/prettier-plugin-liquid':
+        optional: true
+      '@trivago/prettier-plugin-sort-imports':
+        optional: true
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-css-order:
+        optional: true
+      prettier-plugin-import-sort:
+        optional: true
+      prettier-plugin-jsdoc:
+        optional: true
+      prettier-plugin-marko:
+        optional: true
+      prettier-plugin-organize-attributes:
+        optional: true
+      prettier-plugin-organize-imports:
+        optional: true
+      prettier-plugin-style-order:
+        optional: true
+      prettier-plugin-svelte:
+        optional: true
+      prettier-plugin-twig-melody:
+        optional: true
+    dependencies:
+      '@ianvs/prettier-plugin-sort-imports': 4.1.1(prettier@3.1.1)
+      prettier: 3.1.1
+    dev: true
+
+  /prettier@3.1.1:
+    resolution: {integrity: sha512-22UbSzg8luF4UuZtzgiUOfcGM8s4tjBv6dJRT7j275NXsy2jb4aJa4NNveul5x4eqlF1wuhuR2RElK71RvmVaw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
@@ -6424,7 +6508,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: false
 
   /send@0.18.0:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
@@ -7322,7 +7405,6 @@ packages:
 
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
-    dev: false
 
   /yaml@2.3.4:
     resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
