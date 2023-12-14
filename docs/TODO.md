@@ -1,4 +1,6 @@
 - [x] expo router
+- [x] tailwind config
+- [x] lucide icons
 - [ ] animations examples
   - [ ] lottie
   - [ ] react native skia

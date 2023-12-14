@@ -1,23 +1,15 @@
-import { Link } from "expo-router"
-import { StyleSheet, Text, View } from "react-native"
+import { Text, View } from "react-native"
 
-import { ScreenLayout } from "@/components/generic/ScreenLayout"
+import { Link } from "@/components/generic/link"
+import { ScreenLayout } from "@/components/generic/screen-layout"
 
 export default function Index() {
   return (
-    <ScreenLayout>
-      <View style={styles.container}>
-        <Text>Skia animations</Text>
-        <Link href="/">Back to home</Link>
+    <ScreenLayout
+      customHeader={<Link href="/" text="Go back to home" withBackIcon />}>
+      <View className="flex flex-1 items-center justify-center">
+        <Text className="text-3xl text-white">Skia animations</Text>
       </View>
     </ScreenLayout>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})
