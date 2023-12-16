@@ -12,7 +12,8 @@ module.exports = function (api) {
           extensions: [".js", ".ts", ".tsx", ".json"]
         }
       ],
-      "nativewind/babel"
+      "nativewind/babel",
+      "react-native-reanimated/plugin"
     ]
   }
 }
