@@ -1,7 +1,6 @@
 - [x] expo router
 - [x] tailwind config
 - [x] lucide icons
-- [ ] animations examples
-  - [ ] lottie
-  - [ ] react native skia
-  - [ ] react native reanimated?
+- [ ] animations examples using skia and reanimated
+  - [ ] tarot example
+  - [ ] custom one

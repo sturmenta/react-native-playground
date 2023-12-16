@@ -10,8 +10,8 @@ export const ScreenLayout = ({
 }) => {
   return (
     <SafeAreaView className="flex-1 bg-emerald-700">
-      {customHeader}
       <StatusBar style="light" />
+      {customHeader}
       {children}
     </SafeAreaView>
   )

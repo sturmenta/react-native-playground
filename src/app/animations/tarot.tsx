@@ -8,7 +8,7 @@ export default function Index() {
     <ScreenLayout
       customHeader={<Link href="/" text="Go back to home" withBackIcon />}>
       <View className="flex flex-1 items-center justify-center">
-        <Text className="text-3xl text-white">Lottie animations</Text>
+        <Text className="text-3xl text-white">Tarot</Text>
       </View>
     </ScreenLayout>
   )
