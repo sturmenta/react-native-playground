@@ -1,4 +1,5 @@
-import { StatusBar, StyleSheet, View } from "react-native"
+import { StatusBar } from "expo-status-bar"
+import { View } from "react-native"
 import { useSharedValue } from "react-native-reanimated"
 
 import { TarotCard } from "@/components/for-this-app/tarot-card"
@@ -24,8 +25,7 @@ export default function Index() {
   return (
     <ScreenLayout
       customHeader={<Link href="/" text="Go back to home" withBackIcon />}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.container}>
+      <View className="flex flex-1">
         {cards.map((card, index) => (
           <TarotCard
             card={card}
@@ -35,13 +35,7 @@ export default function Index() {
           />
         ))}
       </View>
+      <StatusBar hidden />
     </ScreenLayout>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-    // backgroundColor: "lightblue"
-  }
-})

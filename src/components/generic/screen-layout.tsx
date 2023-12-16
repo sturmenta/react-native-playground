@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 export const ScreenLayout = ({
@@ -11,6 +12,7 @@ export const ScreenLayout = ({
     <SafeAreaView className="flex-1 bg-emerald-700">
       {customHeader}
       {children}
+      <StatusBar style="light" />
     </SafeAreaView>
   )
 }

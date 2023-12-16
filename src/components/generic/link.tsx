@@ -16,7 +16,7 @@ export const Link = ({
   return (
     <ExpoLink href={href} asChild>
       <TouchableOpacity
-        className={`flex flex-row items-center space-x-2 p-2 ${showDevBorder(
+        className={`flex flex-row items-center space-x-2 p-3 ${showDevBorder(
           "border-red-500"
         )}`}>
         {withBackIcon && <ArrowLeft size={20} className="text-white" />}
