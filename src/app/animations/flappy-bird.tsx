@@ -5,8 +5,8 @@ import { GameEngine } from "react-native-game-engine"
 
 import { Link } from "@/components/generic/link"
 import { ScreenLayout } from "@/components/generic/screen-layout"
-import { entities } from "@/game-engine/entities"
-import { physics } from "@/game-engine/physics"
+import { entities } from "@/game-engine/flappy-bird/entities"
+import { physics } from "@/game-engine/flappy-bird/physics"
 
 // custom types because in the original library, the stop() method is not typed
 interface MyGameEngine extends GameEngine {
