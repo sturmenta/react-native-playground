@@ -2,13 +2,13 @@ import Matter from "matter-js"
 import React from "react"
 import { View } from "react-native"
 
-interface ObstacleProps {
+interface MeteorProps {
   body: Matter.Body
   color: string
   label: string
 }
 
-const _obstacle = (props: ObstacleProps) => {
+const _meteor = (props: MeteorProps) => {
   const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
   const heightBody = props.body.bounds.max.y - props.body.bounds.min.y
 
@@ -33,22 +33,20 @@ const _obstacle = (props: ObstacleProps) => {
   )
 }
 
-export const Obstacle: InitGameComponent = (world, color, pos, size, label) => {
-  const initialObstacle = Matter.Bodies.rectangle(
+export const Meteor: InitGameComponent = (world, color, pos, size, label) => {
+  const initialMeteor = Matter.Bodies.rectangle(
     pos.x,
     pos.y,
     size.width,
     size.height,
-    { label, isStatic: true }
+    { label: "Meteor" }
   )
-  Matter.World.add(world, initialObstacle)
+  Matter.World.add(world, initialMeteor)
 
   return {
-    body: initialObstacle,
+    body: initialMeteor,
     color,
     pos,
-    renderer: (
-      <_obstacle body={initialObstacle} color={color} label={label || ""} />
-    )
+    renderer: <_meteor color={color} body={initialMeteor} label={label || ""} />
   }
 }

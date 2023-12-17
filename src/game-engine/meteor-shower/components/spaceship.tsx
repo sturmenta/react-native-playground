@@ -2,13 +2,12 @@ import Matter from "matter-js"
 import React from "react"
 import { View } from "react-native"
 
-interface ObstacleProps {
+interface SpaceshipProps {
   body: Matter.Body
   color: string
-  label: string
 }
 
-const _obstacle = (props: ObstacleProps) => {
+const _spaceship = (props: SpaceshipProps) => {
   const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
   const heightBody = props.body.bounds.max.y - props.body.bounds.min.y
 
@@ -33,22 +32,20 @@ const _obstacle = (props: ObstacleProps) => {
   )
 }
 
-export const Obstacle: InitGameComponent = (world, color, pos, size, label) => {
-  const initialObstacle = Matter.Bodies.rectangle(
+export const Spaceship: InitGameComponent = (world, color, pos, size) => {
+  const initialSpaceship = Matter.Bodies.rectangle(
     pos.x,
     pos.y,
     size.width,
     size.height,
-    { label, isStatic: true }
+    { label: "Spaceship" }
   )
-  Matter.World.add(world, initialObstacle)
+  Matter.World.add(world, initialSpaceship)
 
   return {
-    body: initialObstacle,
+    body: initialSpaceship,
     color,
     pos,
-    renderer: (
-      <_obstacle body={initialObstacle} color={color} label={label || ""} />
-    )
+    renderer: <_spaceship color={color} body={initialSpaceship} />
   }
 }

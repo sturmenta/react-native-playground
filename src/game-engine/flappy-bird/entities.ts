@@ -1,23 +1,25 @@
 import Matter from "matter-js"
-import { Dimensions } from "react-native"
 
 import { Bird } from "./components/bird"
 import { Floor } from "./components/floor"
 import { Obstacle } from "./components/obstacle"
 import { getPipeSizePosPair } from "./utils/random"
 
-const windowHeight = Dimensions.get("window").height
-const windowWidth = Dimensions.get("window").width
-
-export const entities = () => {
+export const entities = ({
+  gameEngineSize
+}: {
+  gameEngineSize: { height: number; width: number }
+}) => {
   let engine = Matter.Engine.create({ enableSleeping: false })
-
   let world = engine.world
-
   world.gravity.y = 0.4
 
-  const pipeSizePosA = getPipeSizePosPair()
-  const pipeSizePosB = getPipeSizePosPair(windowWidth * 0.9)
+  const pipeSizePosA = getPipeSizePosPair({ gameEngineSize })
+  const pipeSizePosB = getPipeSizePosPair({
+    addToPosX: gameEngineSize.width * 0.9,
+    gameEngineSize
+  })
+
   return {
     physics: { engine, world },
 
@@ -56,8 +58,8 @@ export const entities = () => {
     Floor: Floor(
       world,
       "blue",
-      { x: windowWidth / 2, y: windowHeight },
-      { height: 50, width: windowWidth }
+      { x: gameEngineSize.width / 2, y: gameEngineSize.height },
+      { height: 50, width: gameEngineSize.width }
     )
   }
 }
