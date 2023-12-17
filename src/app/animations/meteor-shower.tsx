@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar"
-import { ArrowLeft, ArrowRight } from "lucide-react-native"
 import { useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 
+import { DraggableXJoystick } from "@/components/for-this-app/draggable-x-joystick"
 import { Link } from "@/components/generic/link"
 import { ScreenLayout } from "@/components/generic/screen-layout"
 import { GameEngine_Generic } from "@/game-engine/game-engine"
@@ -51,17 +51,12 @@ export default function Index() {
             )
           }}
         </ContainerWithDimensions>
-        <View className="flex flex-row space-x-5 p-5">
+        <View className="flex flex-row p-5">
           <TouchableOpacity className="flex h-20 w-20 items-center justify-center rounded-full bg-red-500">
             <Text className="text-white">Fire!</Text>
           </TouchableOpacity>
-          <View className="flex flex-1 flex-row items-center justify-center space-x-3 rounded-md bg-white/40">
-            <ArrowLeft size={32} color="white" />
-            <View className="flex h-16 w-16 items-center justify-center rounded-full bg-yellow-500">
-              <Text className="text-white">Drag</Text>
-            </View>
-            <ArrowRight size={32} color="white" />
-          </View>
+          <View className="w-5" />
+          <DraggableXJoystick />
         </View>
       </View>
       <StatusBar hidden />
