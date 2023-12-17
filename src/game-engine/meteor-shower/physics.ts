@@ -1,7 +1,7 @@
 import Matter, { Engine } from "matter-js"
-import { GestureResponderEvent } from "react-native"
 
-// import { getMeteorRandomPosition } from "./utils/random"
+import { meteorSize } from "./entities"
+import { getMeteorRandomPosition } from "./utils/random"
 
 interface EntitiesInterface {
   [key: `Meteor${number}`]: {
@@ -15,40 +15,41 @@ interface EntitiesInterface {
 export const physics =
   ({ gameEngineSize }: { gameEngineSize: { height: number; width: number } }) =>
   (entities: EntitiesInterface, { touches, time, dispatch }: any) => {
-    let engine = entities.physics.engine
-
-    touches
-      .filter((t: GestureResponderEvent) => t.type === "press")
-      .forEach(() => {
-        Matter.Body.setVelocity(entities.Spaceship.body, { x: 0, y: -6 })
-      })
-
+    const engine = entities.physics.engine
     Matter.Engine.update(engine, time.delta)
 
-    // console.log(`gameEngineSize`, gameEngineSize)
+    for (let index = 1; index <= 3; index++) {
+      const isMeteorLeaveScreen =
+        entities[`Meteor${index}`].body.bounds.max.y >=
+        gameEngineSize.height + meteorSize * 2
 
-    // for (let index = 1; index <= 2; index++) {
-    //   if (
-    //     entities[`Meteor${index}`].body.bounds.max.x <= 50 &&
-    //     !entities[`Meteor${index}`].point
-    //   ) {
-    //     entities[`Meteor${index}`].point = true
-    //     dispatch({ type: "new_point" })
-    //   }
+      if (isMeteorLeaveScreen && !entities[`Meteor${index}`].point) {
+        // score a new point
+        entities[`Meteor${index}`].point = true
+        dispatch({ type: "new_point" })
+      }
 
-    //   if (entities[`Meteor${index}`].body.bounds.max.x <= 0) {
-    //     const pipeSizePos = getMeteorRandomPosition(windowWidth * 0.9)
+      if (isMeteorLeaveScreen) {
+        // respawn meteor
+        const meteorRandomPosition = getMeteorRandomPosition({
+          addToPosY: 0,
+          gameEngineSize
+        })
+        Matter.Body.setPosition(
+          entities[`Meteor${index}`].body,
+          meteorRandomPosition
+        )
+        entities[`Meteor${index}`].point = false
+      }
 
-    //     Matter.Body.setPosition(entities[`Meteor${index}`].body, pipeSizePos.pos)
+      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+    }
 
-    //     entities[`Meteor${index}`].point = false
-    //   }
-
-    //   Matter.Body.translate(entities[`Meteor${index}`].body, { x: -3, y: 0 })
-    // }
-
-    Matter.Events.on(engine, "collisionStart", (event) => {
+    Matter.Events.on(engine, "collisionStart", () =>
       dispatch({ type: "game_over" })
-    })
+    )
+
     return entities
   }

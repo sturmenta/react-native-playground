@@ -4,7 +4,8 @@ import { Meteor } from "./components/meteor"
 import { Spaceship } from "./components/spaceship"
 import { getMeteorRandomPosition } from "./utils/random"
 
-const SpaceshipSize = 40
+const spaceshipSize = 40
+export const meteorSize = 40
 
 export const entities = ({
   gameEngineSize
@@ -15,8 +16,6 @@ export const entities = ({
   let world = engine.world
   world.gravity.y = 0.0
 
-  const randomPos = getMeteorRandomPosition({ gameEngineSize })
-
   return {
     physics: { engine, world },
 
@@ -25,16 +24,38 @@ export const entities = ({
       "red",
       {
         x: gameEngineSize?.width / 2,
-        y: gameEngineSize?.height - SpaceshipSize
+        y: gameEngineSize?.height - spaceshipSize
       },
-      { height: SpaceshipSize, width: SpaceshipSize }
+      { height: spaceshipSize, width: spaceshipSize }
     ),
 
     Meteor1: Meteor(
       world,
       "blue",
-      randomPos,
-      { height: 40, width: 40 },
+      getMeteorRandomPosition({ gameEngineSize }),
+      { height: meteorSize, width: meteorSize },
+      "Meteor1"
+    ),
+
+    Meteor2: Meteor(
+      world,
+      "blue",
+      getMeteorRandomPosition({
+        gameEngineSize,
+        addToPosY: -gameEngineSize.height / 3
+      }),
+      { height: meteorSize, width: meteorSize },
+      "Meteor1"
+    ),
+
+    Meteor3: Meteor(
+      world,
+      "blue",
+      getMeteorRandomPosition({
+        gameEngineSize,
+        addToPosY: (-gameEngineSize.height / 3) * 2
+      }),
+      { height: meteorSize, width: meteorSize },
       "Meteor1"
     )
   }
