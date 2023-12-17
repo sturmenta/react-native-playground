@@ -14,9 +14,19 @@ interface EntitiesInterface {
 
 export const physics =
   ({ gameEngineSize }: { gameEngineSize: { height: number; width: number } }) =>
-  (entities: EntitiesInterface, { touches, time, dispatch }: any) => {
+  (entities: EntitiesInterface, { events, time, dispatch }: any) => {
     const engine = entities.physics.engine
     Matter.Engine.update(engine, time.delta)
+
+    if (events.length) {
+      for (let i = 0; i < events.length; i++) {
+        if (events[i].type === "spaceship__move_left") {
+          Matter.Body.translate(entities.Spaceship.body, { x: -3, y: 0 })
+        } else if (events[i].type === "spaceship__move_right") {
+          Matter.Body.translate(entities.Spaceship.body, { x: +3, y: 0 })
+        }
+      }
+    }
 
     for (let index = 1; index <= 3; index++) {
       const isMeteorLeaveScreen =

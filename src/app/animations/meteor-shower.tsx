@@ -1,16 +1,22 @@
 import { StatusBar } from "expo-status-bar"
-import { useState } from "react"
+import { ArrowLeft, ArrowRight } from "lucide-react-native"
+import { useRef, useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 
 import { DraggableXJoystick } from "@/components/for-this-app/draggable-x-joystick"
 import { Link } from "@/components/generic/link"
 import { ScreenLayout } from "@/components/generic/screen-layout"
-import { GameEngine_Generic } from "@/game-engine/game-engine"
+import {
+  GameEngine_Generic,
+  GameEngine_Generic__Ref
+} from "@/game-engine/game-engine"
 import { entities } from "@/game-engine/meteor-shower/entities"
 import { physics } from "@/game-engine/meteor-shower/physics"
 import { ContainerWithDimensions } from "@/utils/container-with-dimensions"
 
 export default function Index() {
+  const ref_gameEngine = useRef<GameEngine_Generic__Ref | null>(null)
+
   const [currentPoints, setCurrentPoints] = useState(0)
   const [calculatingGameEngineSize, setCalculatingGameEngineSize] =
     useState(true)
@@ -39,6 +45,7 @@ export default function Index() {
 
             return (
               <GameEngine_Generic
+                ref={ref_gameEngine}
                 currentPoints={{
                   set: setCurrentPoints,
                   value: currentPoints
@@ -57,6 +64,20 @@ export default function Index() {
           </TouchableOpacity>
           <View className="w-5" />
           <DraggableXJoystick />
+          <TouchableOpacity
+            onPress={() =>
+              ref_gameEngine.current?.dispatch({ type: "spaceship__move_left" })
+            }>
+            <ArrowLeft size={32} className="text-gray-200" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              ref_gameEngine.current?.dispatch({
+                type: "spaceship__move_right"
+              })
+            }>
+            <ArrowRight size={32} className="text-gray-200" />
+          </TouchableOpacity>
         </View>
       </View>
       <StatusBar hidden />
