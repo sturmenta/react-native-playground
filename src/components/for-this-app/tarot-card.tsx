@@ -43,6 +43,7 @@ export const TarotCard = ({
   const rotateZ = useSharedValue(0)
   const delay = index * DURATION
   const theta = -10 + Math.random() * 20
+
   useEffect(() => {
     translateY.value = withDelay(
       delay,
@@ -50,6 +51,7 @@ export const TarotCard = ({
     )
     rotateZ.value = withDelay(delay, withSpring(theta))
   }, [delay, index, rotateZ, theta, translateY])
+
   useAnimatedReaction(
     () => shuffleBack.value,
     (v) => {
@@ -65,6 +67,7 @@ export const TarotCard = ({
       }
     }
   )
+
   const gesture = Gesture.Pan()
     .onBegin(() => {
       offset.value = { x: translateX.value, y: translateY.value }
@@ -99,6 +102,7 @@ export const TarotCard = ({
       { scale: scale.value }
     ]
   }))
+
   return (
     <View style={styles.container} pointerEvents="box-none">
       <GestureDetector gesture={gesture}>

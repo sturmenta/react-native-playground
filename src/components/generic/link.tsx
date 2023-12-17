@@ -20,7 +20,9 @@ export const Link = ({
           "border-red-500"
         )}`}>
         {withBackIcon && <ArrowLeft size={20} className="text-white" />}
-        <Text className="text-lg text-white">{text}</Text>
+        <Text className="max-w-[300px] text-center text-lg text-white">
+          {text}
+        </Text>
         {!withBackIcon && <ArrowRight size={20} className="ml-2 text-white" />}
       </TouchableOpacity>
     </ExpoLink>
