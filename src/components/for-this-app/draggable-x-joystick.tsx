@@ -1,45 +1,67 @@
+// @sources
+// - useDerivedValue -> https://docs.swmansion.com/react-native-reanimated/docs/2.x/api/hooks/useDerivedValue/
+// - wrapper -> https://github.com/software-mansion/react-native-reanimated/issues/1393#issuecomment-1041341133
+// - another way that works -> https://github.com/software-mansion/react-native-reanimated/issues/1445#issuecomment-729148598
+
 import { ArrowLeft, ArrowRight } from "lucide-react-native"
+import { useEffect, useState } from "react"
 import { Text, View } from "react-native"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, {
   runOnJS,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
   withTiming
 } from "react-native-reanimated"
 
-// TODO: implement runOnUI
-
 export const DraggableXJoystick = ({
   onMoveLeft,
-  onMoveRight
+  onMoveRight,
+  onNoMove
 }: {
   onMoveLeft: () => void
   onMoveRight: () => void
+  onNoMove: () => void
 }) => {
+  const [currentPosition, setCurrentPosition] = useState<
+    "left" | "center" | "right"
+  >("center")
+
   const pressed = useSharedValue(false)
   const offset = useSharedValue(0)
 
-  const genericWorklet = (cb: () => void) => {
-    "worklet"
-    runOnJS(cb)()
+  // NOTE: use useEffect to call the callbacks many times
+  useEffect(() => {
+    if (currentPosition === "left") onMoveLeft()
+    else if (currentPosition === "right") onMoveRight()
+    else onNoMove()
+  }, [currentPosition])
+
+  // ─────────────────────────────────────────────────────────────────────
+  // NOTE: define wrapper function before it's called in useDerivedValue
+  const wrapper = (value: number) => {
+    if (value > 0) setCurrentPosition("right")
+    else if (value < 0) setCurrentPosition("left")
+    else setCurrentPosition("center")
   }
+
+  useDerivedValue(() => {
+    if (pressed.value) runOnJS(wrapper)(offset.value)
+    else runOnJS(wrapper)(0)
+  }, [offset.value, pressed.value])
+  // ─────────────────────────────────────────────────────────────────────
 
   const pan = Gesture.Pan()
     .onBegin(() => (pressed.value = true))
     .onChange((event) => {
-      if (event.translationX > 0) genericWorklet(onMoveRight)
-      else if (event.translationX < 0) genericWorklet(onMoveLeft)
-
       if (event.translationX > -90 && event.translationX < 90)
         offset.value = event.translationX
     })
     .onFinalize(() => {
       offset.value = withSpring(0)
       pressed.value = false
-
-      console.log("stop moving")
     })
 
   const animatedStyleForDraggableButton = useAnimatedStyle(() => ({

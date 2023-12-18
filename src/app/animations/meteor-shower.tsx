@@ -65,12 +65,18 @@ export default function Index() {
           <View className="w-5" />
           <DraggableXJoystick
             onMoveLeft={() =>
-              ref_gameEngine.current?.dispatch({ type: "spaceship__move_left" })
+              // ref_gameEngine.current?.dispatch({ type: "spaceship__move_left" })
+              console.log("move left")
             }
             onMoveRight={() =>
-              ref_gameEngine.current?.dispatch({
-                type: "spaceship__move_right"
-              })
+              // ref_gameEngine.current?.dispatch({
+              //   type: "spaceship__move_right"
+              // })
+              console.log("move right")
+            }
+            onNoMove={() =>
+              // ref_gameEngine.current?.dispatch({ type: "spaceship__no_move" })
+              console.log("no move")
             }
           />
         </View>

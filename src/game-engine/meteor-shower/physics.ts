@@ -28,34 +28,34 @@ export const physics =
       }
     }
 
-    for (let index = 1; index <= 3; index++) {
-      const isMeteorLeaveScreen =
-        entities[`Meteor${index}`].body.bounds.max.y >=
-        gameEngineSize.height + meteorSize * 2
+    // for (let index = 1; index <= 3; index++) {
+    //   const isMeteorLeaveScreen =
+    //     entities[`Meteor${index}`].body.bounds.max.y >=
+    //     gameEngineSize.height + meteorSize * 2
 
-      if (isMeteorLeaveScreen && !entities[`Meteor${index}`].point) {
-        // score a new point
-        entities[`Meteor${index}`].point = true
-        dispatch({ type: "new_point" })
-      }
+    //   if (isMeteorLeaveScreen && !entities[`Meteor${index}`].point) {
+    //     // score a new point
+    //     entities[`Meteor${index}`].point = true
+    //     dispatch({ type: "new_point" })
+    //   }
 
-      if (isMeteorLeaveScreen) {
-        // respawn meteor
-        const meteorRandomPosition = getMeteorRandomPosition({
-          addToPosY: 0,
-          gameEngineSize
-        })
-        Matter.Body.setPosition(
-          entities[`Meteor${index}`].body,
-          meteorRandomPosition
-        )
-        entities[`Meteor${index}`].point = false
-      }
+    //   if (isMeteorLeaveScreen) {
+    //     // respawn meteor
+    //     const meteorRandomPosition = getMeteorRandomPosition({
+    //       addToPosY: 0,
+    //       gameEngineSize
+    //     })
+    //     Matter.Body.setPosition(
+    //       entities[`Meteor${index}`].body,
+    //       meteorRandomPosition
+    //     )
+    //     entities[`Meteor${index}`].point = false
+    //   }
 
-      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
-      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
-      Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
-    }
+    //   Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+    //   Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+    //   Matter.Body.translate(entities[`Meteor${index}`].body, { y: +3, x: 0 })
+    // }
 
     Matter.Events.on(engine, "collisionStart", () =>
       dispatch({ type: "game_over" })
