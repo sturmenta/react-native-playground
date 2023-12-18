@@ -58,27 +58,32 @@ export default function Index() {
             )
           }}
         </ContainerWithDimensions>
-        <View className="flex flex-row p-5">
-          <TouchableOpacity className="flex h-20 w-20 items-center justify-center rounded-full bg-red-500">
-            <Text className="text-white">Fire!</Text>
-          </TouchableOpacity>
-          <View className="w-5" />
-          <DraggableXJoystick
-            onMoveLeft={() =>
-              // ref_gameEngine.current?.dispatch({ type: "spaceship__move_left" })
-              console.log("move left")
-            }
-            onMoveRight={() =>
-              // ref_gameEngine.current?.dispatch({
-              //   type: "spaceship__move_right"
-              // })
-              console.log("move right")
-            }
-            onNoMove={() =>
-              // ref_gameEngine.current?.dispatch({ type: "spaceship__no_move" })
-              console.log("no move")
-            }
-          />
+        <View className="flex flex-row py-4">
+          <ContainerWithDimensions
+            viewProps={{ style: { flex: 1, height: 100 } }}>
+            {({ width, height }) => {
+              return (
+                <DraggableXJoystick
+                  onMoveLeft={() =>
+                    ref_gameEngine.current?.dispatch({
+                      type: "spaceship__move_left"
+                    })
+                  }
+                  onMoveRight={() =>
+                    ref_gameEngine.current?.dispatch({
+                      type: "spaceship__move_right"
+                    })
+                  }
+                  onNoMove={() =>
+                    ref_gameEngine.current?.dispatch({
+                      type: "spaceship__no_move"
+                    })
+                  }
+                  maxSizes={{ width, height }}
+                />
+              )
+            }}
+          </ContainerWithDimensions>
         </View>
       </View>
       <StatusBar hidden />

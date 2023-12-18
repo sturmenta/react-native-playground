@@ -19,11 +19,13 @@ import Animated, {
 export const DraggableXJoystick = ({
   onMoveLeft,
   onMoveRight,
-  onNoMove
+  onNoMove,
+  maxSizes
 }: {
   onMoveLeft: () => void
   onMoveRight: () => void
   onNoMove: () => void
+  maxSizes: { width: number; height: number }
 }) => {
   const [currentPosition, setCurrentPosition] = useState<
     "left" | "center" | "right"
@@ -53,11 +55,18 @@ export const DraggableXJoystick = ({
   }, [offset.value, pressed.value])
   // ─────────────────────────────────────────────────────────────────────
 
+  const oneThirdContainerWidth = maxSizes.width / 3
+
   const pan = Gesture.Pan()
     .onBegin(() => (pressed.value = true))
     .onChange((event) => {
-      if (event.translationX > -90 && event.translationX < 90)
+      if (
+        event.translationX > -oneThirdContainerWidth &&
+        event.translationX < oneThirdContainerWidth
+      ) {
+        // set max movement
         offset.value = event.translationX
+      }
     })
     .onFinalize(() => {
       offset.value = withSpring(0)
@@ -67,7 +76,7 @@ export const DraggableXJoystick = ({
   const animatedStyleForDraggableButton = useAnimatedStyle(() => ({
     transform: [
       { translateX: offset.value },
-      { scale: withTiming(pressed.value ? 1 : 0.8) }
+      { scale: withTiming(pressed.value ? 1.2 : 1) }
     ],
     backgroundColor: pressed.value ? "#dbc140" : "#eab308"
   }))

@@ -4,7 +4,7 @@ import { Meteor } from "./components/meteor"
 import { Spaceship } from "./components/spaceship"
 import { getMeteorRandomPosition } from "./utils/random"
 
-const spaceshipSize = 40
+export const spaceshipSize = 40
 export const meteorSize = 40
 
 export const entities = ({
@@ -45,7 +45,7 @@ export const entities = ({
         addToPosY: -gameEngineSize.height / 3
       }),
       { height: meteorSize, width: meteorSize },
-      "Meteor1"
+      "Meteor2"
     ),
 
     Meteor3: Meteor(
@@ -56,7 +56,7 @@ export const entities = ({
         addToPosY: (-gameEngineSize.height / 3) * 2
       }),
       { height: meteorSize, width: meteorSize },
-      "Meteor1"
+      "Meteor3"
     )
   }
 }
