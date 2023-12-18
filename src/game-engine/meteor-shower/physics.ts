@@ -3,11 +3,6 @@ import Matter, { Engine } from "matter-js"
 import { meteorSize, spaceshipSize } from "./entities"
 import { getMeteorRandomPosition } from "./utils/random"
 
-const spaceshipVelocity = 8
-
-// NOTE: the movement could be improved if we get from the controller the
-// distance from the drag to the center and transform into velocity
-
 interface EntitiesInterface {
   [key: `Meteor${number}`]: {
     point: boolean
@@ -34,24 +29,18 @@ export const physics =
 
     // NOTE: this could be improved, adding a obstacle without collision to not spaceship leave the screen
     if (outsideLeftSide)
-      Matter.Body.translate(entities.Spaceship.body, {
-        x: +spaceshipVelocity,
-        y: 0
-      })
+      Matter.Body.translate(entities.Spaceship.body, { x: +16, y: 0 })
     if (outsideRightSide)
-      Matter.Body.translate(entities.Spaceship.body, {
-        x: -spaceshipVelocity,
-        y: 0
-      })
+      Matter.Body.translate(entities.Spaceship.body, { x: -16, y: 0 })
     // ─────────────────────────────────────────────────────────────
     if (events.length) {
       events.forEach((e: any) => {
         switch (e.type) {
           case "spaceship__move_left":
-            moveSpaceShip({ x: -spaceshipVelocity })
+            moveSpaceShip({ x: e.value * 0.1 })
             return
           case "spaceship__move_right":
-            moveSpaceShip({ x: +spaceshipVelocity })
+            moveSpaceShip({ x: e.value * 0.1 })
             return
           case "spaceship__no_move":
             moveSpaceShip({ x: 0 })

@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar"
-import { ArrowLeft, ArrowRight } from "lucide-react-native"
 import { useRef, useState } from "react"
-import { Text, TouchableOpacity, View } from "react-native"
+import { Text, View } from "react-native"
 
 import { DraggableXJoystick } from "@/components/for-this-app/draggable-x-joystick"
 import { Link } from "@/components/generic/link"
@@ -64,14 +63,16 @@ export default function Index() {
             {({ width, height }) => {
               return (
                 <DraggableXJoystick
-                  onMoveLeft={() =>
+                  onMoveLeft={(value) =>
                     ref_gameEngine.current?.dispatch({
-                      type: "spaceship__move_left"
+                      type: "spaceship__move_left",
+                      value
                     })
                   }
-                  onMoveRight={() =>
+                  onMoveRight={(value) =>
                     ref_gameEngine.current?.dispatch({
-                      type: "spaceship__move_right"
+                      type: "spaceship__move_right",
+                      value
                     })
                   }
                   onNoMove={() =>

@@ -22,31 +22,20 @@ export const DraggableXJoystick = ({
   onNoMove,
   maxSizes
 }: {
-  onMoveLeft: () => void
-  onMoveRight: () => void
+  onMoveLeft: (position: number) => void
+  onMoveRight: (position: number) => void
   onNoMove: () => void
   maxSizes: { width: number; height: number }
 }) => {
-  const [currentPosition, setCurrentPosition] = useState<
-    "left" | "center" | "right"
-  >("center")
-
   const pressed = useSharedValue(false)
   const offset = useSharedValue(0)
-
-  // NOTE: use useEffect to call the callbacks many times
-  useEffect(() => {
-    if (currentPosition === "left") onMoveLeft()
-    else if (currentPosition === "right") onMoveRight()
-    else onNoMove()
-  }, [currentPosition])
 
   // ─────────────────────────────────────────────────────────────────────
   // NOTE: define wrapper function before it's called in useDerivedValue
   const wrapper = (value: number) => {
-    if (value > 0) setCurrentPosition("right")
-    else if (value < 0) setCurrentPosition("left")
-    else setCurrentPosition("center")
+    if (value > 0) onMoveRight(value)
+    else if (value < 0) onMoveLeft(value)
+    else onNoMove()
   }
 
   useDerivedValue(() => {
