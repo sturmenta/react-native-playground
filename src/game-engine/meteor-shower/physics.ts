@@ -21,9 +21,9 @@ export const physics =
     if (events.length) {
       for (let i = 0; i < events.length; i++) {
         if (events[i].type === "spaceship__move_left") {
-          Matter.Body.translate(entities.Spaceship.body, { x: -3, y: 0 })
+          Matter.Body.translate(entities.Spaceship.body, { x: -5, y: 0 })
         } else if (events[i].type === "spaceship__move_right") {
-          Matter.Body.translate(entities.Spaceship.body, { x: +3, y: 0 })
+          Matter.Body.translate(entities.Spaceship.body, { x: +5, y: 0 })
         }
       }
     }

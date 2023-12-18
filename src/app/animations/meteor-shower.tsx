@@ -63,21 +63,16 @@ export default function Index() {
             <Text className="text-white">Fire!</Text>
           </TouchableOpacity>
           <View className="w-5" />
-          <DraggableXJoystick />
-          <TouchableOpacity
-            onPress={() =>
+          <DraggableXJoystick
+            onMoveLeft={() =>
               ref_gameEngine.current?.dispatch({ type: "spaceship__move_left" })
-            }>
-            <ArrowLeft size={32} className="text-gray-200" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
+            }
+            onMoveRight={() =>
               ref_gameEngine.current?.dispatch({
                 type: "spaceship__move_right"
               })
-            }>
-            <ArrowRight size={32} className="text-gray-200" />
-          </TouchableOpacity>
+            }
+          />
         </View>
       </View>
       <StatusBar hidden />

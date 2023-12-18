@@ -2,24 +2,38 @@ import { ArrowLeft, ArrowRight } from "lucide-react-native"
 import { Text, View } from "react-native"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, {
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming
 } from "react-native-reanimated"
 
-export const DraggableXJoystick = () => {
+// TODO: implement runOnUI
+
+export const DraggableXJoystick = ({
+  onMoveLeft,
+  onMoveRight
+}: {
+  onMoveLeft: () => void
+  onMoveRight: () => void
+}) => {
   const pressed = useSharedValue(false)
   const offset = useSharedValue(0)
+
+  const genericWorklet = (cb: () => void) => {
+    "worklet"
+    runOnJS(cb)()
+  }
 
   const pan = Gesture.Pan()
     .onBegin(() => (pressed.value = true))
     .onChange((event) => {
+      if (event.translationX > 0) genericWorklet(onMoveRight)
+      else if (event.translationX < 0) genericWorklet(onMoveLeft)
+
       if (event.translationX > -90 && event.translationX < 90)
         offset.value = event.translationX
-
-      if (event.translationX > 0) console.log("move right")
-      else if (event.translationX < 0) console.log("move left")
     })
     .onFinalize(() => {
       offset.value = withSpring(0)
