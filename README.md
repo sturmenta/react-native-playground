@@ -1,4 +1,4 @@
-# react-native-starter
+# react-native-playground
 
 > repo for testing react-native-reanimated v3 and react-native-game-engine
 
